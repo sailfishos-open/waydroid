@@ -4,6 +4,7 @@ Release:        1
 Summary:        Waydroid uses a container-based approach to boot a full Android system on a regular GNU/Linux system like Ubuntu.
 License:        GPLv3
 URL:            https://github.com/waydroid
+BuildArch:      noarch
 Source0:        %{name}-%{version}.tar.gz
 Source1:        anbox.conf
 
