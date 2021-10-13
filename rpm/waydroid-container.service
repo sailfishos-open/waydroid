@@ -1,0 +1,13 @@
+[Unit]
+Description=Waydroid container
+After=graphical.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=no
+Restart=never
+ExecStart=/usr/bin/waydroid container start
+ExecStop=/usr/bin/waydroid container stop
+
+[Install]
+WantedBy=graphical.target

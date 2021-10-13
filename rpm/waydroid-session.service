@@ -1,0 +1,13 @@
+[Unit]
+Description=Waydroid container
+Requires=waydroid-container.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=no
+Restart=never
+ExecStart=/usr/bin/waydroid session start
+ExecStop=/usr/bin/waydroid session stop
+
+[Install]
+WantedBy=user-session.target

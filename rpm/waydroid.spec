@@ -7,6 +7,8 @@ URL:            https://github.com/waydroid
 BuildArch:      noarch
 Source0:        %{name}-%{version}.tar.gz
 Source1:        anbox.conf
+Source2:        waydroid-container.service
+Source3:        waydroid-session.service
 
 Requires:       lxc
 Requires:       dnsmasq
@@ -25,7 +27,6 @@ The Android runtime environment ships with a minimal customized Android system i
 %install
 mkdir -p %{buildroot}/opt/waydroid
 mkdir -p %{buildroot}/home/waydroid
-mkdir -p %{buildroot}/etc/gbinder.d
 chown 10000:10000 %{buildroot}/home/waydroid
 cp -r upstream/* %{buildroot}/opt/waydroid
 mkdir -p %{buildroot}/var/lib/
@@ -33,11 +34,12 @@ ln -sf /home/waydroid %{buildroot}/var/lib/waydroid
 mkdir -p %{buildroot}/usr/bin
 ln -sf /opt/waydroid/waydroid.py %{buildroot}/usr/bin/waydroid
 
-install -m644 %{SOURCE1} %{buildroot}/etc/gbinder.d/
+install -D -m644 %{SOURCE1} %{buildroot}/etc/gbinder.d/anbox.conf
+install -D -m644 %{SOURCE2} %{buildroot}/%{_unitdir}/waydroid-container.service
+install -D -m644 %{SOURCE3} %{buildroot}/%{_userunitdir}/waydroid-session.service
 
 %clean
 rm -rf $RPM_BUILD_ROOT
-
 
 %files
 %defattr(-,root,root,-)
@@ -46,3 +48,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_sharedstatedir}/waydroid
 %{_sysconfdir}/gbinder.d/anbox.conf
 %{_bindir}/waydroid
+%{_unitdir}/waydroid-container.service
+%{_userunitdir}/waydroid-session.service
