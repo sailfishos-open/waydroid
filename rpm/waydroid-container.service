@@ -3,7 +3,7 @@ Description=Waydroid container
 After=graphical.target
 
 [Service]
-Type=oneshot
+Type=simple
 RemainAfterExit=no
 Restart=never
 ExecStart=/usr/bin/waydroid container start

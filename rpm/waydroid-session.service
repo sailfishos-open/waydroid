@@ -1,9 +1,8 @@
 [Unit]
 Description=Waydroid container
-Requires=waydroid-container.service
 
 [Service]
-Type=oneshot
+Type=simple
 RemainAfterExit=no
 Restart=never
 ExecStart=/usr/bin/waydroid session start
