@@ -38,7 +38,7 @@ ln -sf /opt/waydroid/waydroid.py %{buildroot}/usr/bin/waydroid
 install -D -m644 %{SOURCE1} %{buildroot}/etc/gbinder.d/anbox.conf
 install -D -m644 %{SOURCE2} %{buildroot}/%{_unitdir}/waydroid-container.service
 install -D -m644 %{SOURCE3} %{buildroot}/%{_userunitdir}/waydroid-session.service
-install -D -m644 %{SOURCE4} %{buildroot}/%{_userunitdir}/etc/modules-load.d/waydroid.conf
+install -D -m644 %{SOURCE4} %{buildroot}/etc/modules-load.d/waydroid.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
