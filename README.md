@@ -21,3 +21,4 @@ cat /etc/modules-load.d/waydroid.conf
 veth
 xt_CHECKSUM
 ```
+* Android vibration service is disabled in Sailfish and needs to be enabled for waydroid
