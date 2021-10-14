@@ -27,7 +27,7 @@ The Android runtime environment ships with a minimal customized Android system i
 %install
 mkdir -p %{buildroot}/opt/waydroid
 mkdir -p %{buildroot}/home/waydroid
-chown 10000:10000 %{buildroot}/home/waydroid
+chown defaultuser:users %{buildroot}/home/waydroid
 cp -r upstream/* %{buildroot}/opt/waydroid
 mkdir -p %{buildroot}/var/lib/
 ln -sf /home/waydroid %{buildroot}/var/lib/waydroid
@@ -41,10 +41,14 @@ install -D -m644 %{SOURCE3} %{buildroot}/%{_userunitdir}/waydroid-session.servic
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post
+systemctl daemon-reload
+systemctl-user daemon-reload
+
 %files
 %defattr(-,root,root,-)
 /opt/waydroid
-/home/waydroid
+%attr(-, defaultuser, users)/home/waydroid
 %{_sharedstatedir}/waydroid
 %{_sysconfdir}/gbinder.d/anbox.conf
 %{_bindir}/waydroid
