@@ -4,8 +4,7 @@
 
 * Install this package
 * As defaultuser run the command 'waydroid init' which will download the required root filesytems
-* As root, run the command 'systemctl start waydroid-container'
-* As defaultuser, run the command 'systemctl start waydroid-session'
+* Reboot (services were enabled afer installation and will start next boot)
 * As defaultuser, run the command 'waydroid show-full-ui'
 
 And hopefully you will be presented with an android window
