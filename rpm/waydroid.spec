@@ -10,6 +10,8 @@ Source1:        anbox.conf
 Source2:        waydroid-container.service
 Source3:        waydroid-session.service
 Source4:        waydroid.conf
+Source5:        waydroid.json
+Source6:        Waydroid.qml
 
 Requires:       lxc
 Requires:       dnsmasq
@@ -39,6 +41,10 @@ install -D -m644 %{SOURCE2} %{buildroot}/%{_unitdir}/waydroid-container.service
 install -D -m644 %{SOURCE3} %{buildroot}/%{_userunitdir}/waydroid-session.service
 install -D -m644 %{SOURCE4} %{buildroot}/etc/modules-load.d/waydroid.conf
 
+#Settings files
+install -D -m644 %{SOURCE5} %{buildroot}/usr/share/jolla-settings/entries//waydroid.json
+install -D -m644 %{SOURCE6} %{buildroot}/usr/share/waydroid/settings/Waydroid.qml
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -58,3 +64,5 @@ systemctl-user enable waydroid-session
 %{_bindir}/waydroid
 %{_unitdir}/waydroid-container.service
 %{_userunitdir}/waydroid-session.service
+%{_datadir}/jolla-settings/entries/waydroid.json
+%{_datadir}/waydroid/settings/Waydroid.qml
