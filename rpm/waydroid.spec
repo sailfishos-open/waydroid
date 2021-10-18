@@ -13,6 +13,7 @@ Source4:        waydroid.conf
 Source5:        waydroid.json
 Source6:        Waydroid.qml
 
+BuildRequires:  systemd
 Requires:       lxc
 Requires:       dnsmasq
 Requires:       python-gbinder-python
