@@ -23,7 +23,7 @@ Page {
             var status = waydroidSessionService.getProperty("ActiveState")
             waydroidSystemdStatus.status = status
             if (path !== "") {
-                root.serviceRunning = status === "active"
+                root.serviceRunning = (status === "active")
             } else {
                 root.serviceRunning = false
             }
@@ -133,6 +133,7 @@ Page {
                               function(job) {
                                   console.log("job stopped - ", job)
                                   waydroidSessionService.updateProperties()
+                                  runningUpdateTimer.start()
                               },
                               function() {
                                   console.log("job stopped failure")
