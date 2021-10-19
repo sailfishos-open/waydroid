@@ -12,6 +12,7 @@ Source3:        waydroid-session.service
 Source4:        waydroid.conf
 Source5:        waydroid.json
 Source6:        Waydroid.qml
+Patch0:         0001-disable-user-manager.patch
 
 BuildRequires:  systemd
 Requires:       lxc
@@ -27,7 +28,8 @@ The Android system inside the container has direct access to any needed hardware
 The Android runtime environment ships with a minimal customized Android system image based on LineageOS. The image is currently based on Android 10.
 
 %prep
-%setup -q
+%setup
+%patch0 -p1
 
 %install
 mkdir -p %{buildroot}/opt/waydroid

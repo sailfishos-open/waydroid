@@ -1,0 +1,13 @@
+diff --git a/tools/services/user_manager.py b/tools/services/user_manager.py
+index 137c5de..f4eb7f0 100644
+--- a/tools/services/user_manager.py
++++ b/tools/services/user_manager.py
+@@ -92,7 +92,7 @@ def start(args, unlocked_cb=None):
+         IUserMonitor.add_service(args, userUnlocked, packageStateChanged)
+ 
+     args.user_manager = threading.Thread(target=service_thread)
+-    args.user_manager.start()
++    #args.user_manager.start()
+ 
+ def stop(args):
+     try:
