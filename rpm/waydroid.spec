@@ -12,6 +12,7 @@ Source3:        waydroid-session.service
 Source4:        waydroid.conf
 Source5:        waydroid.json
 Source6:        Waydroid.qml
+Source7:        waydroid.desktop
 Patch0:         0001-disable-user-manager.patch
 
 BuildRequires:  systemd
@@ -49,6 +50,7 @@ install -D -m644 %{SOURCE4} %{buildroot}/etc/modules-load.d/waydroid.conf
 install -D -m644 %{SOURCE5} %{buildroot}/usr/share/jolla-settings/entries//waydroid.json
 install -D -m644 %{SOURCE6} %{buildroot}/usr/share/waydroid/settings/Waydroid.qml
 
+desktop-file-install %{SOURCE6}
 %clean
 rm -rf $RPM_BUILD_ROOT
 
