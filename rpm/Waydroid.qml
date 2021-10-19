@@ -239,5 +239,6 @@ Page {
     }
     Component.onCompleted: {
         ready = true;
+        waydroidSessionService.updateProperties();
     }
 }
