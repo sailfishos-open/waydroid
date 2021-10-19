@@ -28,8 +28,7 @@ The Android system inside the container has direct access to any needed hardware
 The Android runtime environment ships with a minimal customized Android system image based on LineageOS. The image is currently based on Android 10.
 
 %prep
-%setup
-%patch0 -p1
+%autosetup
 
 %install
 mkdir -p %{buildroot}/opt/waydroid
