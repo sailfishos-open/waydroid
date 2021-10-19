@@ -1,4 +1,4 @@
-diff --git a/tools/services/user_manager.py b/tools/services/user_manager.py
+diff --git a/upstream/tools/services/user_manager.py b/upstream/tools/services/user_manager.py
 index 137c5de..f4eb7f0 100644
 --- a/tools/services/user_manager.py
 +++ b/tools/services/user_manager.py
