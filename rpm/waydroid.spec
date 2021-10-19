@@ -16,6 +16,7 @@ Source7:        waydroid.desktop
 Patch0:         0001-disable-user-manager.patch
 
 BuildRequires:  systemd
+BuildRequires:  desktop-file-utils
 Requires:       lxc
 Requires:       dnsmasq
 Requires:       python-gbinder-python
