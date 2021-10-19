@@ -58,7 +58,6 @@ rm -rf $RPM_BUILD_ROOT
 systemctl daemon-reload
 systemctl-user daemon-reload
 systemctl enable waydroid-container
-systemctl-user enable waydroid-session
 
 %files
 %defattr(-,root,root,-)
