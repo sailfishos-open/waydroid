@@ -3,8 +3,7 @@ Description=Waydroid session
 
 [Service]
 Type=simple
-RemainAfterExit=no
-Restart=never
+Restart=no
 ExecStart=/usr/bin/waydroid session start
 ExecStop=/usr/bin/waydroid session stop
 

@@ -4,8 +4,7 @@ After=graphical.target
 
 [Service]
 Type=simple
-RemainAfterExit=no
-Restart=never
+Restart=no
 ExecStart=/usr/bin/waydroid container start
 ExecStop=/usr/bin/waydroid container stop
 
