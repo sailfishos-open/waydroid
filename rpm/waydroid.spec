@@ -51,7 +51,8 @@ install -D -m644 %{SOURCE4} %{buildroot}/etc/modules-load.d/waydroid.conf
 install -D -m644 %{SOURCE5} %{buildroot}/usr/share/jolla-settings/entries//waydroid.json
 install -D -m644 %{SOURCE6} %{buildroot}/usr/share/waydroid/settings/Waydroid.qml
 
-desktop-file-install %{SOURCE6}
+desktop-file-install %{SOURCE7}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -72,3 +73,4 @@ systemctl enable waydroid-container
 %{_userunitdir}/waydroid-session.service
 %{_datadir}/jolla-settings/entries/waydroid.json
 %{_datadir}/waydroid/settings/Waydroid.qml
+%{_datadir}/applications/waydroid.desktop
