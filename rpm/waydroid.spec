@@ -19,7 +19,7 @@ BuildRequires:  systemd
 BuildRequires:  desktop-file-utils
 Requires:       lxc
 Requires:       dnsmasq
-Requires:       python-gbinder-python
+Requires:       python3-gbinder
 Requires:       python3-gobject
 
 %description
