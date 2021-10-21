@@ -9,7 +9,8 @@ Page {
     property bool serviceRunning
     property bool waydroidAutostart
     property bool ready: false
-
+    property string serviceStatus: serviceRunning ? "active" : "inactive"
+    property string serviceName: "waydroid-session.service"
 
     DBusInterface {
         id: waydroidSessionService
@@ -20,10 +21,9 @@ Page {
         signalsEnabled: true
 
         function updateProperties() {
-            var status = waydroidSessionService.getProperty("ActiveState")
-            waydroidSystemdStatus.status = status
             if (path !== "") {
-                root.serviceRunning = (status === "active")
+                var s = waydroidSessionService.getProperty("ActiveState")
+                root.serviceRunning = (s === "active")
             } else {
                 root.serviceRunning = false
             }
@@ -41,21 +41,8 @@ Page {
         signalsEnabled: true
 
         signal unitNew(string name)
-        onUnitNew: {
-            if (name == "waydroid-session.service") {
-                pathUpdateTimer.start()
-            }
-        }
-
-        signal unitRemoved(string name)
-        onUnitRemoved: {
-            if (name == "waydroid-session.service") {
-                waydroidSessionService.path = ""
-                pathUpdateTimer.stop()
-            }
-        }
-
         signal unitFilesChanged()
+
         onUnitFilesChanged: {
             updateAutostart()
         }
@@ -65,17 +52,19 @@ Page {
             updateAutostart()
         }
         function updateAutostart() {
-            manager.typedCall("GetUnitFileState", [{"type": "s", "value": "waydroid-session.service"}],
+            manager.typedCall("GetUnitFileState", [{"type": "s", "value": serviceName}],
                               function(state) {
                                   console.log(state)
                                   if (state !== "disabled" && state !== "invalid") {
                                       root.waydroidAutostart = true
                                   } else {
                                       root.waydroidAutostart = false
+                                      root.serviceRunning = false
                                   }
                               },
                               function() {
                                   root.waydroidAutostart = false
+                                  root.serviceRunning = false
                               })
             }
 
@@ -86,8 +75,8 @@ Page {
                 disableWaydroidUnit()
         }
 
-        function enableaydroidUnit() {
-            manager.typedCall( "EnableUnitFiles",[{"type":"as","value":["waydroid-session.service"]},
+        function enableWaydroidUnit() {
+            manager.typedCall( "EnableUnitFiles",[{"type":"as","value":[serviceName]},
                                                   {"type":"b","value":false},
                                                   {"type":"b","value":false}],
                               function(carries_install_info,changes){
@@ -102,7 +91,7 @@ Page {
         }
 
         function disableWaydroidUnit() {
-            manager.typedCall( "DisableUnitFiles",[{"type":"as","value":["waydroid-session.service"]},
+            manager.typedCall( "DisableUnitFiles",[{"type":"as","value":[serviceName]},
                                                    {"type":"b","value":false}],
                               function(changes){
                                   root.waydroidAutostart = false
@@ -115,7 +104,7 @@ Page {
         }
 
         function startWaydroidUnit() {
-            manager.typedCall( "StartUnit",[{"type":"s","value":"waydroid-session.service"},
+            manager.typedCall( "StartUnit",[{"type":"s","value":serviceName},
                                             {"type":"s","value":"fail"}],
                               function(job) {
                                   console.log("job started - ", job)
@@ -128,7 +117,7 @@ Page {
         }
 
         function stopWaydroidUnit() {
-            manager.typedCall( "StopUnit",[{"type":"s","value":"waydroid-session.service"},
+            manager.typedCall( "StopUnit",[{"type":"s","value":serviceName},
                                            {"type":"s","value":"replace"}],
                               function(job) {
                                   console.log("job stopped - ", job)
@@ -141,7 +130,8 @@ Page {
         }
 
         function updatePath() {
-            manager.typedCall("GetUnit", [{ "type": "s", "value": "waydroid-session.service"}], function(unit) {
+             manager.typedCall("LoadUnit", [{ "type": "s", "value": serviceName}]);
+            manager.typedCall("GetUnit", [{ "type": "s", "value": serviceName}], function(unit) {
                 waydroidSessionService.path = unit
             }, function() {
                 waydroidSessionService.path = ""
@@ -150,20 +140,14 @@ Page {
     }
 
     Timer {
-        // starting and stopping can result in lots of property changes
         id: runningUpdateTimer
         interval: 1000
+        running: true
         repeat: true
         onTriggered:{
+            manager.updatePath()
             waydroidSessionService.updateProperties()
         }
-    }
-
-    Timer {
-        // stopping service can result in unit appearing and disappering, for some reason.
-        id: pathUpdateTimer
-        interval: 200
-        onTriggered: manager.updatePath()
     }
 
     SilicaFlickable {
@@ -203,10 +187,9 @@ Page {
 
             Label {
                 id: waydroidSystemdStatus
-                property string status: "invalid"
                 x: Theme.horizontalPageMargin
                 width: parent.width - 2*Theme.horizontalPageMargin
-                text: qsTr("Waydroid session current status") + " - " + status
+                text: qsTr("Waydroid session current status") + " - " + root.serviceStatus
                 wrapMode: Text.Wrap
                 font.pixelSize: Theme.fontSizeExtraSmall
                 color: Theme.secondaryHighlightColor
@@ -239,6 +222,6 @@ Page {
     }
     Component.onCompleted: {
         ready = true;
-        waydroidSessionService.updateProperties();
+        manager.call( "Reload" )
     }
 }
