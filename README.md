@@ -3,9 +3,10 @@
 ## User Usage
 
 * Install this package
-* As defaultuser run the command 'waydroid init' which will download the required root filesytems
-* Reboot (services were enabled afer installation and will start next boot)
-* As defaultuser, run the command 'waydroid show-full-ui'
+* As root (devel-su) run the command 'waydroid init' which will download the required root filesytems
+* Reboot (container service will start next boot)
+* Goto jolla settings > waydroid and start the "Session" service (you can choose to start it automatically)
+* Click on the Waydroid icon launcher, this will start the fullscreen waydroid UI
 
 And hopefully you will be presented with an android window
 
