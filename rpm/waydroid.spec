@@ -1,6 +1,6 @@
 Name:           waydroid
 Version:        1.2.0
-Release:        1
+Release:        2
 Summary:        Waydroid uses a container-based approach to boot a full Android system on a regular GNU/Linux system like Ubuntu.
 License:        GPLv3
 URL:            https://github.com/waydroid
@@ -21,6 +21,7 @@ Requires:       lxc
 Requires:       dnsmasq
 Requires:       python3-gbinder
 Requires:       python3-gobject
+Requires:       waydroid-sensors
 
 %description
 Waydroid uses Linux namespaces (user, pid, uts, net, mount, ipc) to run a full Android system in a container and provide Android applications on any GNU/Linux-based platform.
