@@ -6,13 +6,6 @@ License:        GPLv3
 URL:            https://github.com/waydroid
 BuildArch:      noarch
 Source0:        %{name}-%{version}.tar.gz
-Source1:        anbox.conf
-Source2:        waydroid-container.service
-Source3:        waydroid-session.service
-Source4:        waydroid.conf
-Source5:        waydroid.json
-Source6:        Waydroid.qml
-Source7:        waydroid.desktop
 Patch0:         0001-disable-user-manager.patch
 
 BuildRequires:  systemd
@@ -30,6 +23,13 @@ The Android system inside the container has direct access to any needed hardware
 
 The Android runtime environment ships with a minimal customized Android system image based on LineageOS. The image is currently based on Android 10.
 
+%package settings
+Summary: System Settings module for Waydroid
+Requires: %{name} = %{version}
+
+%description settings
+Support for enabling Waydroid session as a SystemD service and use of Waydroid through direct rendering on Sailfish composer.
+
 %prep
 %setup
 %patch0 -p1
@@ -43,16 +43,16 @@ ln -sf /home/waydroid %{buildroot}/var/lib/waydroid
 mkdir -p %{buildroot}/usr/bin
 ln -sf /opt/waydroid/waydroid.py %{buildroot}/usr/bin/waydroid
 
-install -D -m644 %{SOURCE1} %{buildroot}/etc/gbinder.d/anbox.conf
-install -D -m644 %{SOURCE2} %{buildroot}/%{_unitdir}/waydroid-container.service
-install -D -m644 %{SOURCE3} %{buildroot}/%{_userunitdir}/waydroid-session.service
-install -D -m644 %{SOURCE4} %{buildroot}/etc/modules-load.d/waydroid.conf
+install -D -m644 config/anbox.conf %{buildroot}/etc/gbinder.d/anbox.conf
+install -D -m644 config/waydroid-container.service %{buildroot}/%{_unitdir}/waydroid-container.service
+install -D -m644 config/waydroid-session.service %{buildroot}/%{_userunitdir}/waydroid-session.service
+install -D -m644 config/waydroid.conf %{buildroot}/etc/modules-load.d/waydroid.conf
 
-#Settings files
-install -D -m644 %{SOURCE5} %{buildroot}/usr/share/jolla-settings/entries//waydroid.json
-install -D -m644 %{SOURCE6} %{buildroot}/usr/share/waydroid/settings/Waydroid.qml
+# Settings files
+install -D -m644 settings/waydroid.json %{buildroot}/usr/share/jolla-settings/entries/waydroid.json
+install -D -m644 settings/Waydroid.qml %{buildroot}/usr/share/waydroid/settings/Waydroid.qml
 
-desktop-file-install %{SOURCE7}
+desktop-file-install config/waydroid.desktop
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -71,6 +71,9 @@ systemctl enable waydroid-container
 %{_sysconfdir}/modules-load.d/waydroid.conf
 %{_bindir}/waydroid
 %{_unitdir}/waydroid-container.service
+
+%files settings
+%defattr(-,root,root,-)
 %{_userunitdir}/waydroid-session.service
 %{_datadir}/jolla-settings/entries/waydroid.json
 %{_datadir}/waydroid/settings/Waydroid.qml
