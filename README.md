@@ -1,14 +1,37 @@
-# Waydroid sailfish packaging
+# Waydroid Sailfish OS packaging
 
 ## User Usage
 
-* Install this package
-* As root (devel-su) run the command 'waydroid init' which will download the required root filesytems
-* Reboot (container service will start next boot)
-* Goto jolla settings > waydroid and start the "Session" service (you can choose to start it automatically)
+You can run Waydroid session either by starting it as a systemd
+service (on boot or on request) or through dedicated app. As it is
+recommended to run Waydroid using its full UI mode, UI is similar in
+the both approaches.
+
+When using Waydroid through systemd services, Waydroid settings are
+available as a module of Sailfish Settings. These allow you to request
+starting the session on boot and start/stop session. UI of the session
+will be opened with the launcher on applications grid. Main drawback
+of using UI via this approach is that if you close the UI in Lipstick,
+it will not open again due to some issue in interaction between
+Lipstick and Waydroid. To use this approach, install package
+*waydroid-settings*.
+
+In the case of the dedicated app, Waydroid session will be started
+with start of the app and closed with the app. As a result, it is
+slower than using pre-started Waydroid session via systemd. The
+dedicated app can be installed via *waydroid-runner* package.
+
+* Install `waydroid-settings` or `waydroid-runner` package.
+* As root (devel-su) run the command `waydroid init` which will download the required root filesystems. See `waydroid init -h` for the list of available images.
+* Reboot (container service will start next boot).
+
+If using *waydroid-settings*:
+* Goto Jolla Settings > Waydroid and start the "Session" service (you can choose to start it automatically)
 * Click on the Waydroid icon launcher, this will start the fullscreen waydroid UI
 
-And hopefully you will be presented with an android window
+If using *waydroid-runner*, start it from the launcher.
+
+It is expected that you will be presented with an Android window.
 
 ## Porter tasks
 
@@ -21,4 +44,4 @@ cat /etc/modules-load.d/waydroid.conf
 veth
 xt_CHECKSUM
 ```
-* Android vibration service is disabled in Sailfish and needs to be enabled for waydroid
+* Android vibration service is disabled in Sailfish and needs to be enabled for Waydroid
