@@ -1,6 +1,6 @@
 Name:           waydroid
 Version:        1.2.0
-Release:        2
+Release:        3
 Summary:        Waydroid uses a container-based approach to boot a full Android system on a regular GNU/Linux system like Ubuntu.
 License:        GPLv3
 URL:            https://github.com/waydroid
@@ -28,7 +28,7 @@ Summary: System Settings module for Waydroid
 Requires: %{name} = %{version}
 
 %description settings
-Support for enabling Waydroid session as a SystemD service and use of Waydroid through direct rendering on Sailfish composer.
+Support for enabling Waydroid session as a systemd service and use of Waydroid through direct rendering on Sailfish composer.
 
 %prep
 %setup
