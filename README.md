@@ -18,8 +18,10 @@ Lipstick and Waydroid. To use this approach, install package
 
 In the case of the dedicated app, Waydroid session will be started
 with start of the app and closed with the app. As a result, it is
-slower than using pre-started Waydroid session via systemd. The
-dedicated app can be installed via *waydroid-runner* package.
+slower to start than using pre-started Waydroid session via
+systemd. In addition, as it is using nested Wayland composer, it is
+expected to be slower than running directly on Lipstick. The dedicated
+app can be installed via *waydroid-runner* package.
 
 * Install `waydroid-settings` or `waydroid-runner` package.
 * As root (devel-su) run the command `waydroid init` which will download the required root filesystems. See `waydroid init -h` for the list of available images.
