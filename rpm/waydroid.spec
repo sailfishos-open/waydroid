@@ -1,6 +1,6 @@
 Name:           waydroid
 Version:        1.2.0
-Release:        3
+Release:        4
 Summary:        Waydroid uses a container-based approach to boot a full Android system on a regular GNU/Linux system like Ubuntu.
 License:        GPLv3
 URL:            https://github.com/waydroid
