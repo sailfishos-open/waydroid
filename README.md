@@ -24,6 +24,7 @@ expected to be slower than running directly on Lipstick. The dedicated
 app can be installed via *waydroid-runner* package.
 
 * Install `waydroid-settings` or `waydroid-runner` package.
+* Install `waydroid-gbinder-config-hybris` or `waydroid-gbinder-config-mainline` depending on the type of device you have
 * As root (devel-su) run the command `waydroid init` which will download the required root filesystems. See `waydroid init -h` for the list of available images.
 * Reboot (container service will start next boot).
 
