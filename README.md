@@ -48,3 +48,20 @@ veth
 xt_CHECKSUM
 ```
 * Android vibration service is disabled in Sailfish and needs to be enabled for Waydroid
+
+## Troubleshooting
+
+### dnsmasq: failed to create listening socket for 192.168.250.1: Address already in use
+
+In case `waydroid-container.service` fails to start with the above error, there are 2 options:
+
+* If the *dnsmasq* service is running, disable it with `devel-su systemctl disable --now dnsmasq`.
+* If you would like to keep the *dnsmasq* service alive, edit `/etc/dnsmasq.conf` to uncomment the following line:
+
+    ```
+    #bind-interfaces
+    ```
+
+  Then restart *dnsmasq* with `devel-su systemctl restart dnsmasq`.
+
+Remember to restart the container service with `devel-su systemctl restart waydroid-container` in either cases.
