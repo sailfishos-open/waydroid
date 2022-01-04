@@ -1,9 +1,9 @@
 Name:           waydroid
 Version:        1.2.0
 Release:        5
-Summary:        Waydroid uses a container-based approach to boot a full Android system on a regular GNU/Linux system like Ubuntu.
+Summary:        Container-based approach to boot a full Android system
 License:        GPLv3
-URL:            https://github.com/waydroid
+URL:            https://waydro.id/
 BuildArch:      noarch
 Source0:        %{name}-%{version}.tar.gz
 Patch0:         0001-disable-user-manager.patch
@@ -24,12 +24,25 @@ The Android system inside the container has direct access to any needed hardware
 
 The Android runtime environment ships with a minimal customized Android system image based on LineageOS. The image is currently based on Android 10.
 
+Custom:
+  Repo: https://github.com/waydroid/waydroid
+Type: console-application
+Icon: https://raw.githubusercontent.com/waydroid/waydroid/bullseye/data/AppIcon.png
+Categories:
+  - System
+
 %package settings
 Summary: System Settings module for Waydroid
 Requires: %{name} = %{version}
 
 %description settings
 Support for enabling Waydroid session as a systemd service and use of Waydroid through direct rendering on Sailfish composer.
+
+Custom:
+  Repo: https://github.com/sailfishos-open/waydroid
+Icon: https://raw.githubusercontent.com/waydroid/waydroid/bullseye/data/AppIcon.png
+Categories:
+  - System
 
 %package gbinder-config-hybris
 Summary: gbinder config for hybris ports
