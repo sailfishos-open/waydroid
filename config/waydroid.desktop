@@ -3,3 +3,6 @@ Type=Application
 Name=Waydroid
 Exec=waydroid show-full-ui
 Icon=/opt/waydroid/data/AppIcon.png
+
+[X-Sailjail]
+Sandboxing=Disabled
