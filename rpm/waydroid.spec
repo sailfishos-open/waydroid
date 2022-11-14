@@ -1,6 +1,6 @@
 Name:           waydroid
-Version:        1.2.0
-Release:        5
+Version:        1.3.3
+Release:        1
 Summary:        Container-based approach to boot a full Android system
 License:        GPLv3
 URL:            https://waydro.id/
