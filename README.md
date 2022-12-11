@@ -36,6 +36,33 @@ If using *waydroid-runner*, start it from the launcher.
 
 It is expected that you will be presented with an Android window.
 
+### Note about waydroid-gbinder-config packages
+
+A config file is required for libgbinder < 1.1.20.  As of Sailfish 4.4, libgbinder 1.1.18 is shipped.
+
+A config file is provided in packages waydroid-gbinder-config-hybris and waydroid-gbinder-config-mainline, adding a file to
+/etc/gbinder.d/
+which details the binder nodes and aidl version used for the waydroid release.
+
+A typical file looks like:
+  [Protocol]
+  /dev/puddlejumper = aidl2
+  /dev/vndpuddlejumper = aidl2
+  /dev/hwpuddlejumper = hidl
+
+  [ServiceManager]
+  /dev/puddlejumper = aidl2
+  /dev/vndpuddlejumper = aidl2
+  /dev/hwpuddlejumper = hidl
+
+However, different devices have different binder files, or they may be in another location such as /dev/binderfs/.
+
+Filenames are typically /dev/*puddlejumper and /dev/anbox-*binder and depending on the waydroid version, the aidl version needs to be 2 or 3.
+
+Because of all these combinations, it is easier for a user to provide the config file for their device based on the description above, or the device parter can include the config file with their port.
+
+Once libgbinder 1.1.20 is available in SailfishOS, the config file will no longer be required.
+
 ## Porter tasks
 
 * Ensure the kernel is built with puddlejumper,hwpuddlejumper and vndpuddlejumper binder nodes
