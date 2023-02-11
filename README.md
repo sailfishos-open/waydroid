@@ -45,6 +45,7 @@ A config file is provided in packages waydroid-gbinder-config-hybris and waydroi
 which details the binder nodes and aidl version used for the waydroid release.
 
 A typical file looks like:
+```
   [Protocol]
   /dev/puddlejumper = aidl2
   /dev/vndpuddlejumper = aidl2
@@ -54,7 +55,7 @@ A typical file looks like:
   /dev/puddlejumper = aidl2
   /dev/vndpuddlejumper = aidl2
   /dev/hwpuddlejumper = hidl
-
+```
 However, different devices have different binder files, or they may be in another location such as /dev/binderfs/.
 
 Filenames are typically /dev/*puddlejumper and /dev/anbox-*binder and depending on the waydroid version, the aidl version needs to be 2 or 3.
