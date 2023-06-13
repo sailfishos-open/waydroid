@@ -47,13 +47,13 @@ which details the binder nodes and aidl version used for the waydroid release.
 A typical file looks like:
 ```
   [Protocol]
-  /dev/puddlejumper = aidl2
-  /dev/vndpuddlejumper = aidl2
+  /dev/puddlejumper = aidl3
+  /dev/vndpuddlejumper = aidl3
   /dev/hwpuddlejumper = hidl
 
   [ServiceManager]
-  /dev/puddlejumper = aidl2
-  /dev/vndpuddlejumper = aidl2
+  /dev/puddlejumper = aidl3
+  /dev/vndpuddlejumper = aidl3
   /dev/hwpuddlejumper = hidl
 ```
 However, different devices have different binder files, or they may be in another location such as /dev/binderfs/.
