@@ -74,6 +74,7 @@ mkdir -p %{buildroot}/var/lib/
 ln -sf /home/waydroid %{buildroot}/var/lib/waydroid
 mkdir -p %{buildroot}/usr/bin
 ln -sf /opt/waydroid/waydroid.py %{buildroot}/usr/bin/waydroid
+install -D -m644 upstream/dbus/id.waydro.Container.conf %{buildroot}%{_datadir}/dbus-1/system.d/id.waydro.Container.conf
 
 install -D -m644 config/anbox-hybris.conf %{buildroot}/etc/gbinder.d/anbox-hybris.conf
 install -D -m644 config/anbox-mainline.conf %{buildroot}/etc/gbinder.d/anbox-mainline.conf
@@ -108,6 +109,7 @@ systemctl enable waydroid-container
 %{_sysconfdir}/modules-load.d/waydroid.conf
 %{_bindir}/waydroid
 %{_unitdir}/waydroid-container.service
+%{_datadir}/dbus-1/system.d/id.waydro.Container.conf
 
 %files settings
 %defattr(-,root,root,-)
