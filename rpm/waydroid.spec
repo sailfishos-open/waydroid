@@ -1,5 +1,5 @@
 Name:           waydroid
-Version:        1.3.4
+Version:        1.3.4+git1
 Release:        1
 Summary:        Container-based approach to boot a full Android system
 License:        GPLv3
@@ -7,6 +7,7 @@ URL:            https://waydro.id/
 BuildArch:      noarch
 Source0:        %{name}-%{version}.tar.gz
 Patch0:         0001-disable-user-manager.patch
+Patch1:         0002-Remove-apparmor-reference-in-config_3.patch
 
 BuildRequires:  systemd
 BuildRequires:  desktop-file-utils
@@ -88,6 +89,11 @@ desktop-file-install config/waydroid.desktop
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%pre
+if [ $1 == 2 ]; then
+  sed -i '/apparmor/d' %{_sharedstatedir}/waydroid/lxc/waydroid/config || :
+fi
 
 %post
 systemctl daemon-reload

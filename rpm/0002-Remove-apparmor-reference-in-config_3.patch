@@ -1,0 +1,24 @@
+From 386cf050b93b63fd83de43c5687c52f70383b8c0 Mon Sep 17 00:00:00 2001
+From: "Vlad G." <b100dian@gmail.com>
+Date: Sun, 23 Jun 2024 17:22:40 +0300
+Subject: [PATCH] Remove apparmor reference in config_3
+
+---
+ data/configs/config_3 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/data/configs/config_3 b/data/configs/config_3
+index 3c82226..21c13d9 100644
+--- a/data/configs/config_3
++++ b/data/configs/config_3
+@@ -1,6 +1,6 @@
+ lxc.uts.name = waydroid
+ 
+-lxc.apparmor.profile = unconfined
++#lxc.apparmor.profile = unconfined
+ lxc.seccomp.profile = /var/lib/waydroid/lxc/waydroid/waydroid.seccomp
+ 
+ lxc.no_new_privs = 1
+-- 
+2.45.2
+
