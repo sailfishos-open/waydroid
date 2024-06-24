@@ -92,7 +92,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %pre
 if [ $1 == 2 ]; then
-  sed -i '/apparmor/d' %{_sharedstatedir}/waydroid/lxc/waydroid/config
+  sed -i '/apparmor/d' %{_sharedstatedir}/waydroid/lxc/waydroid/config || :
 fi
 
 %post
