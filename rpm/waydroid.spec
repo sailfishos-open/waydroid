@@ -1,5 +1,5 @@
 Name:           waydroid
-Version:        1.4.2
+Version:        1.4.3
 Release:        1
 Summary:        Container-based approach to boot a full Android system
 License:        GPLv3
@@ -63,8 +63,8 @@ Conflicts: waydroid-gbinder-config-hybirs
 Provides the gbinder config required for waydroid based on mainline (native) kernel
 
 %prep
-%setup
-%patch0 -p1
+%autosetup -p1 -n %{name}-%{version}/upstream
+
 
 %install
 mkdir -p %{buildroot}/opt/waydroid
