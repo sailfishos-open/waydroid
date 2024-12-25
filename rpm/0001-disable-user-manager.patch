@@ -1,13 +1,13 @@
-diff --git a/upstream/tools/services/user_manager.py b/upstream/tools/services/user_manager.py
-index 137c5de..f4eb7f0 100644
---- a/upstream/tools/services/user_manager.py
-+++ b/upstream/tools/services/user_manager.py
-@@ -92,7 +92,7 @@ def start(args, unlocked_cb=None):
-         IUserMonitor.add_service(args, userUnlocked, packageStateChanged)
- 
+diff --git a/tools/services/user_manager.py b/tools/services/user_manager.py
+index dbde361..aa66159 100644
+--- a/tools/services/user_manager.py
++++ b/tools/services/user_manager.py
+@@ -109,7 +109,7 @@ NoDisplay={str(hide).lower()}
+     global stopping
+     stopping = False
      args.user_manager = threading.Thread(target=service_thread)
 -    args.user_manager.start()
 +    #args.user_manager.start()
  
  def stop(args):
-     try:
+     global stopping
