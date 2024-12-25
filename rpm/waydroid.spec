@@ -63,8 +63,8 @@ Conflicts: waydroid-gbinder-config-hybirs
 Provides the gbinder config required for waydroid based on mainline (native) kernel
 
 %prep
-%setup
-%patch0 -p1
+%autosetup -p1 -n %{name}-%{version}/upstream
+
 
 %install
 mkdir -p %{buildroot}/opt/waydroid
