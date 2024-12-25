@@ -65,28 +65,33 @@ Provides the gbinder config required for waydroid based on mainline (native) ker
 %prep
 %autosetup -p1 -n %{name}-%{version}/upstream
 
-
 %install
-mkdir -p %{buildroot}/opt/waydroid
-mkdir -p %{buildroot}/home/waydroid
-cp -r upstream/* %{buildroot}/opt/waydroid
-mkdir -p %{buildroot}/var/lib/
-ln -sf /home/waydroid %{buildroot}/var/lib/waydroid
-mkdir -p %{buildroot}/usr/bin
-ln -sf /opt/waydroid/waydroid.py %{buildroot}/usr/bin/waydroid
-install -D -m644 upstream/dbus/id.waydro.Container.conf %{buildroot}%{_datadir}/dbus-1/system.d/id.waydro.Container.conf
 
-install -D -m644 config/anbox-hybris.conf %{buildroot}/etc/gbinder.d/anbox-hybris.conf
-install -D -m644 config/anbox-mainline.conf %{buildroot}/etc/gbinder.d/anbox-mainline.conf
-install -D -m644 config/waydroid-container.service %{buildroot}/%{_unitdir}/waydroid-container.service
-install -D -m644 config/waydroid-session.service %{buildroot}/%{_userunitdir}/waydroid-session.service
-install -D -m644 config/waydroid.conf %{buildroot}/etc/modules-load.d/waydroid.conf
+make install DESTDIR=%{buildroot} USE_SYSTEMD=0
+
+install -D -m644 ../config/waydroid-container.service %{buildroot}/%{_unitdir}/waydroid-container.service
+install -D -m644 ../config/waydroid-session.service %{buildroot}/%{_userunitdir}/waydroid-session.service
+install -D -m644 ../config/waydroid.conf %{buildroot}/etc/modules-load.d/waydroid.conf
 
 # Settings files
-install -D -m644 settings/waydroid.json %{buildroot}/usr/share/jolla-settings/entries/waydroid.json
-install -D -m644 settings/Waydroid.qml %{buildroot}/usr/share/waydroid/settings/Waydroid.qml
+install -D -m644 ../settings/waydroid.json %{buildroot}/usr/share/jolla-settings/entries/waydroid.json
+install -D -m644 ../settings/Waydroid.qml %{buildroot}/usr/share/waydroid/settings/Waydroid.qml
 
-desktop-file-install config/waydroid.desktop
+desktop-file-install ../config/waydroid.desktop
+
+#Place waydroid images in /home for space
+mkdir -p %{buildroot}/var/lib/
+mkdir -p %{buildroot}/home/waydroid
+ln -sf /home/waydroid %{buildroot}/var/lib/waydroid
+
+#Sample gbinder config
+install -D -m644 ../config/anbox-hybris.conf %{buildroot}/etc/gbinder.d/anbox-hybris.conf
+install -D -m644 ../config/anbox-mainline.conf %{buildroot}/etc/gbinder.d/anbox-mainline.conf
+
+#Remove less useful file
+rm -f %{buildroot}/usr/share/applications/Waydroid.desktop
+rm -f %{buildroot}/usr/share/applications/waydroid.market.desktop
+rm -f %{buildroot}/etc/xdg/menus/applications-merged/waydroid.menu
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -103,13 +108,18 @@ systemctl enable waydroid-container
 
 %files
 %defattr(-,root,root,-)
-/opt/waydroid
 %attr(-, defaultuser, users)/home/waydroid
 %{_sharedstatedir}/waydroid
 %{_sysconfdir}/modules-load.d/waydroid.conf
 %{_bindir}/waydroid
+%{_prefix}/lib/waydroid
 %{_unitdir}/waydroid-container.service
-%{_datadir}/dbus-1/system.d/id.waydro.Container.conf
+%{_datadir}/dbus-1/
+%{_datadir}/applications/
+%{_datadir}/desktop-directories/
+%{_datadir}/icons/
+%{_datadir}/metainfo/
+%{_datadir}/polkit-1/
 
 %files settings
 %defattr(-,root,root,-)
