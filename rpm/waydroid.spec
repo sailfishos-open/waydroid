@@ -69,15 +69,15 @@ Provides the gbinder config required for waydroid based on mainline (native) ker
 
 make install DESTDIR=%{buildroot} USE_SYSTEMD=0
 
-install -D -m644 %{_sourcedir}/../config/waydroid-container.service %{buildroot}/%{_unitdir}/waydroid-container.service
-install -D -m644 %{_sourcedir}/../config/waydroid-session.service %{buildroot}/%{_userunitdir}/waydroid-session.service
-install -D -m644 %{_sourcedir}/../config/waydroid.conf %{buildroot}/etc/modules-load.d/waydroid.conf
+install -D -m644 ../config/waydroid-container.service %{buildroot}/%{_unitdir}/waydroid-container.service
+install -D -m644 ../config/waydroid-session.service %{buildroot}/%{_userunitdir}/waydroid-session.service
+install -D -m644 ../config/waydroid.conf %{buildroot}/etc/modules-load.d/waydroid.conf
 
 # Settings files
-install -D -m644 %{_sourcedir}/../settings/waydroid.json %{buildroot}/usr/share/jolla-settings/entries/waydroid.json
-install -D -m644 %{_sourcedir}/../settings/Waydroid.qml %{buildroot}/usr/share/waydroid/settings/Waydroid.qml
+install -D -m644 ../settings/waydroid.json %{buildroot}/usr/share/jolla-settings/entries/waydroid.json
+install -D -m644 ../settings/Waydroid.qml %{buildroot}/usr/share/waydroid/settings/Waydroid.qml
 
-desktop-file-install %{_sourcedir}/../config/waydroid.desktop
+desktop-file-install ../config/waydroid.desktop
 
 #Place waydroid images in /home for space
 mkdir -p %{buildroot}/var/lib/
@@ -85,8 +85,8 @@ mkdir -p %{buildroot}/home/waydroid
 ln -sf /home/waydroid %{buildroot}/var/lib/waydroid
 
 #Sample gbinder config
-install -D -m644 %{_sourcedir}/../config/anbox-hybris.conf %{buildroot}/etc/gbinder.d/anbox-hybris.conf
-install -D -m644 %{_sourcedir}/../config/anbox-mainline.conf %{buildroot}/etc/gbinder.d/anbox-mainline.conf
+install -D -m644 ../config/anbox-hybris.conf %{buildroot}/etc/gbinder.d/anbox-hybris.conf
+install -D -m644 ../config/anbox-mainline.conf %{buildroot}/etc/gbinder.d/anbox-mainline.conf
 
 #Remove less useful file
 rm -f %{buildroot}/usr/share/applications/Waydroid.desktop
