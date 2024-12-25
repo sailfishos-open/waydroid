@@ -15,6 +15,7 @@ Requires:       lxc
 Requires:       dnsmasq
 Requires:       python3-gbinder
 Requires:       python3-gobject
+Requires:       python3-dbus
 Requires:       waydroid-sensors
 
 %description
