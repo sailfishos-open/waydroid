@@ -102,7 +102,7 @@ if [ $1 == 2 ]; then
 # Existing config might have apparmor reference, remove it on upgrade since SailfishOS doesn't use apparmor
   sed -i '/apparmor/d' %{_sharedstatedir}/waydroid/lxc/waydroid/config || :
 # Existing config pre 1.4 might not have config_session included. Append it if not, after config_nodes.
-  grep config_session %{_sharedstatedir}/waydroid/lxc/waydroid/config || sed -e '/config_nodes/a\' -e 'lxc.include = %{_sharedstatedir}/waydroid/lxc/waydroid/config_session' %{_sharedstatedir}/waydroid/lxc/waydroid/config
+  grep config_session %{_sharedstatedir}/waydroid/lxc/waydroid/config || sed -e '/config_nodes/a\' -e 'lxc.include = %{_sharedstatedir}/waydroid/lxc/waydroid/config_session' -i %{_sharedstatedir}/waydroid/lxc/waydroid/config
 fi
 
 %post
