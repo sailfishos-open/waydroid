@@ -77,6 +77,7 @@ install -D -m644 ../config/waydroid.conf %{buildroot}/etc/modules-load.d/waydroi
 # Settings files
 install -D -m644 ../settings/waydroid.json %{buildroot}/usr/share/jolla-settings/entries/waydroid.json
 install -D -m644 ../settings/Waydroid.qml %{buildroot}/usr/share/waydroid/settings/Waydroid.qml
+install -D -m644 ../settings/EnableSwitch.qml %{buildroot}/usr/share/waydroid/settings/EnableSwitch.qml
 
 desktop-file-install ../config/waydroid.desktop
 
@@ -130,6 +131,7 @@ systemctl enable waydroid-container
 %{_userunitdir}/waydroid-session.service
 %{_datadir}/jolla-settings/entries/waydroid.json
 %{_datadir}/waydroid/settings/Waydroid.qml
+%{_datadir}/waydroid/settings/EnableSwitch.qml
 %{_datadir}/applications/waydroid.desktop
 
 %files gbinder-config-hybris
